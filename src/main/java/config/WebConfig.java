@@ -4,14 +4,16 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 
 /**
  * \* Created with IntelliJ IDEA.
@@ -24,22 +26,13 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 @ComponentScan({"controller", "config", "dao"})
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    /**配置视图解析**/
+    /**
+     * 配置视图解析
+     **/
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
-        //tile视图解析
-        registry.tiles();
-
         //jsp视图解析
         registry.jsp("/WEB-INF/views/", ".jsp");
-     /*   //jstl视图解析
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(
-                org.springframework.web.servlet.view.JstlView.class
-        );
-        registry.viewResolver(resolver);*/
 
     }
 
@@ -48,7 +41,9 @@ public class WebConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-    /**配置messageSource根据给定编码获取信息**/
+    /**
+     * 用于国际化
+     **/
     @Bean
     public MessageSource messageSource() {
         /*//方法一:
@@ -64,35 +59,18 @@ public class WebConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-
-    //配置apache tiles视图解析
-    //@Bean
-    //public TilesConfigurer tilesConfigurer() {
-    //    TilesConfigurer tilesConfigurer = new TilesConfigurer();
-    //    tilesConfigurer.setDefinitions("/WEB-INF/layout/tiles.xml",
-    //            "/WEB-INF/views/**/tiles.xml");
-    //    tilesConfigurer.setCheckRefresh(true);
-    //    return tilesConfigurer;
-    //}
-
     @Bean
     MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
     }
 
-
-/*   @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/css/**").addResourceLocations("/resources/css/");
-        WebMvcConfigurer.super.addResourceHandlers(registry);
-    }*/
-
-    /*//servlet 工作环境设置
-    @Bean ConfigurableEnvironment configurableEnvironment(){
-        ConfigurableEnvironment environment=new StandardEnvironment();
-        environment.setActiveProfiles();
-        environment.setDefaultProfiles();
-        return environment;
-    }*/
+    /**properties配置 详见http://www.importnew.com/27997.html **/
+    @Bean
+    public PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer propertyConfigurer = new PropertySourcesPlaceholderConfigurer();
+        Resource[] resources=new ClassPathResource[]{new ClassPathResource("application.properties")};
+        propertyConfigurer.setLocations(resources);
+        return propertyConfigurer;
+    }
 
 }
