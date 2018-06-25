@@ -41,7 +41,6 @@ public class DateConfig{
     public DataSource dateSource(){
         DriverManagerDataSource dataSource=new DriverManagerDataSource();
         dataSource.setDriverClassName(driver);
-        // TODO: 18-6-25 useSSL=true
         dataSource.setUrl(url);
         dataSource.setUsername(name);
         dataSource.setPassword(password);
