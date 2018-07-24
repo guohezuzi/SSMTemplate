@@ -3,9 +3,8 @@
   User: guohezuzi
   Date: 18-6-25
   Time: 下午8:35
-  To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>

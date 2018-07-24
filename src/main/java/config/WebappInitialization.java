@@ -41,6 +41,7 @@ public class WebappInitialization extends AbstractAnnotationConfigDispatcherServ
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        //文件上传处理配置
         registration.setMultipartConfig(
                 new MultipartConfigElement("/home/guohezuzi/Code/IdeaProjects/JavaCMS/src/main/webapp/resources/" ,16777216, 33554432, 0)
         );

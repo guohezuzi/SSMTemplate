@@ -1,5 +1,7 @@
 package controller;
 
+import org.springframework.stereotype.Controller;
+
 /**
  * \* Created with IntelliJ IDEA.
  * \* @author: guohezuzi
@@ -8,5 +10,6 @@ package controller;
  * \* Description:foo
  * \
  */
+@Controller
 public class foo {
 }
