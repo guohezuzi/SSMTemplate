@@ -72,6 +72,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.9-rc</version>
         </dependency>
+        <!--druid数据库连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.10</version>
+        </dependency>
     </dependencies>
 
     <build>
