@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
  * \* Description:
  */
 @EnableWebMvc
-@ComponentScan({"controller", "config", "dao"})
+@ComponentScan({"controller", "config"})
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     /**
@@ -47,7 +47,7 @@ public class WebConfig implements WebMvcConfigurer {
     /**配置静态资源处理**/
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 
     /**
