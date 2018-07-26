@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pers.zuzi</groupId>
-    <artifactId>WebApiTemplate</artifactId>
+    <artifactId>SSMTemplate</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>LATEST</version>
+            <version>1.3.2</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>

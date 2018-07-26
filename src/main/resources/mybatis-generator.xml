@@ -23,7 +23,7 @@
         </commentGenerator>
 
         <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+        <jdbcConnection driverClass="${spring.datasource.driverClassName}"
                         connectionURL="${spring.datasource.url}"
                         userId="${spring.datasource.username}"
                         password="${spring.datasource.password}">

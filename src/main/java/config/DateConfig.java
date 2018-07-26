@@ -16,8 +16,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import util.MyMapper;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +34,7 @@ import java.util.List;
  */
 @Configuration
 @PropertySource("classpath:application.properties")
-@MapperScan({"mapper"})
+@MapperScan(basePackages = "dao",markerInterface = MyMapper.class)
 public class DateConfig{
     Logger logger=LoggerFactory.getLogger(DateConfig.class);
 
@@ -167,9 +170,11 @@ public class DateConfig{
 
     /**mybatis sqlSessionFactory配置*/
     @Bean
-    public SqlSessionFactoryBean sessionFactoryBean(DataSource dataSource){
+    public SqlSessionFactoryBean sessionFactoryBean(DataSource dataSource) throws IOException {
         SqlSessionFactoryBean sqlSessionFactoryBean= new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
+        //PathMatchingResourcePatternResolver() 配置路径通配符
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("mapper/*.xml"));
         return sqlSessionFactoryBean;
     }
 

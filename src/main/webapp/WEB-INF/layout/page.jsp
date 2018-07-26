@@ -11,7 +11,7 @@
 <head>
     <link rel="stylesheet"
           type="text/css"
-          href="<c:url value="/css/share.css"/>">
+          href="<c:url value="/static/css/share.css"/>">
 </head>
 <body>
     <div id="header">
