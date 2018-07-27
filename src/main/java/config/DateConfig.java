@@ -8,8 +8,6 @@ import com.alibaba.druid.wall.WallFilter;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import tk.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +34,6 @@ import java.util.List;
 @PropertySource("classpath:application.properties")
 @MapperScan(basePackages = "dao",markerInterface = MyMapper.class)
 public class DateConfig{
-    Logger logger=LoggerFactory.getLogger(DateConfig.class);
-
     @Value("${spring.datasource.driverClassName}")
     private String driver;
 
