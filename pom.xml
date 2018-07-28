@@ -31,13 +31,14 @@
         <!--Apache tile-->
         <dependency>
             <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-core</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-jsp</artifactId>
-            <version>2.2.2</version>
+            <version>3.0.8</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--mvc-->
         <dependency>
@@ -117,19 +118,24 @@
         <!--log-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
+            <artifactId>logback-classic</artifactId>
             <version>1.1.7</version>
         </dependency>
+       <!-- <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>0.1.4</version>
+        </dependency>-->
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.5</version>
                 <dependencies>
-                    <!--配置这个依赖主要是为了等下在配置mybatis-generator.xml的时候可以不用配置classPathEntry这样的一个属性，避免代码的耦合度太高-->
+                    &lt;!&ndash;配置这个依赖主要是为了等下在配置mybatis-generator.xml的时候可以不用配置classPathEntry这样的一个属性，避免代码的耦合度太高&ndash;&gt;
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
@@ -151,14 +157,14 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--允许移动生成的文件 -->
+                    &lt;!&ndash;允许移动生成的文件 &ndash;&gt;
                     <verbose>true</verbose>
-                    <!-- 是否覆盖 -->
+                    &lt;!&ndash; 是否覆盖 &ndash;&gt;
                     <overwrite>true</overwrite>
-                    <!-- 自动生成的配置 -->
+                    &lt;!&ndash; 自动生成的配置 &ndash;&gt;
                     <configurationFile>src/main/resources/mybatis-generator.xml</configurationFile>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>
