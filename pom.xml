@@ -40,7 +40,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--mvc-->
+        <!--thymeleaf模板引擎-->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring5</artifactId>
+            <version>3.0.9.RELEASE</version>
+        </dependency>
+        <!--spring-mvc-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>

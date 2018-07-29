@@ -1,6 +1,7 @@
 package controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * \* Created with IntelliJ IDEA.
@@ -12,5 +13,8 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class foo {
-
+    @RequestMapping("/test")
+    public String test(){
+        return "foo";
+    }
 }
