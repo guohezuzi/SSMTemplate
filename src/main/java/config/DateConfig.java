@@ -5,6 +5,8 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
+import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -23,6 +25,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * \* Created with IntelliJ IDEA.
@@ -62,10 +65,10 @@ public class DateConfig{
     @Value("${spring.datasource.maxWait:#{null}}")
     private Integer maxWait;
 
-    @Value("${spring.datasource.timeBetweenEvictionRunsMillis:#{null}}")
+    @Value("${spring.datasource.timeBetweenEvictionRunsMills:#{null}}")
     private Integer timeBetweenEvictionRunsMillis;
 
-    @Value("${spring.datasource.minEvictableIdleTimeMillis:#{null}}")
+    @Value("${spring.datasource.minEvictableIdleTimeMills:#{null}}")
     private Integer minEvictableIdleTimeMillis;
 
     @Value("${spring.datasource.validationQuery:#{null}}")
@@ -80,7 +83,7 @@ public class DateConfig{
     @Value("${spring.datasource.testOnReturn:#{null}}")
     private Boolean testOnReturn;
 
-    @Value("${spring.datasource.poolPreparedStatements:#{null}}")
+    @Value("${spring.datasource.poolPreparedStatements:#{null} }")
     private Boolean poolPreparedStatements;
 
     @Value("${spring.datasource.maxPoolPreparedStatementPerConnectionSize:#{null}}")
@@ -170,12 +173,26 @@ public class DateConfig{
 
     /**mybatis sqlSessionFactory配置*/
     @Bean
-    public SqlSessionFactoryBean sessionFactoryBean(DataSource dataSource) throws IOException {
+    public SqlSessionFactoryBean sessionFactoryBean(DataSource dataSource,PageInterceptor pageInterceptor) throws IOException {
         SqlSessionFactoryBean sqlSessionFactoryBean= new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         //PathMatchingResourcePatternResolver() 配置路径通配符
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("mapper/*.xml"));
+        Interceptor[] interceptor={pageInterceptor};
+        sqlSessionFactoryBean.setPlugins(interceptor);
         return sqlSessionFactoryBean;
+    }
+
+    /**分页拦截器*/
+    @Bean
+    public PageInterceptor pageInterceptor(){
+        PageInterceptor pageInterceptor=new PageInterceptor();
+        Properties properties=new Properties();
+        properties.setProperty("helperDialect","mysql");
+        properties.setProperty("reasonable","true");
+        properties.setProperty("supportMethodsArguments","true");
+        pageInterceptor.setProperties(properties);
+        return pageInterceptor;
     }
 
     /**mybatis sqlSession配置 可以替代sqlSessionFactory简化代码*/
